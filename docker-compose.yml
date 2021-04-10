@@ -1,0 +1,25 @@
+version: '2'
+services:
+
+  rabbitmq:
+    restart: always
+    image: rabbitmq:latest
+    container_name: rabbitmq_dev
+    hostname: rabbitmq_dev
+    ports:
+      - 5673:5672
+    environment:
+      - RABBITMQ_VM_MEMORY_HIGH_WATERMARK=2048MiB
+
+  postgres:
+    restart: always
+    image: postgres
+    container_name: postgres_dev
+    hostname: postgres_dev
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=fp
+      - POSTGRES_USER=fp
+      - POSTGRES_DB=fp
+    command: postgres -c max_connections=150
